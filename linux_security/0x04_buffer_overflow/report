@@ -1,0 +1,92 @@
+Introduction
+
+A buffer overflow is a type of software vulnerability that occurs when a program writes more data to a buffer than it can hold. Buffers are temporary memory storage areas used to store data such as user input. When these limits are exceeded, the extra data can overwrite adjacent memory locations, leading to unpredictable behavior, system crashes, or exploitation by attackers.
+
+Buffer overflow vulnerabilities are critical in cybersecurity because they can allow attackers to execute arbitrary code, escalate privileges, or gain unauthorized access to a system.
+
+What is a Buffer Overflow?
+
+A buffer overflow happens when a program attempts to store more data in a fixed-size buffer than it was designed to handle. Since low-level languages like C and C++ do not enforce automatic bounds checking, developers must manually ensure that input does not exceed buffer limits.
+
+When overflow occurs:
+
+Data spills into adjacent memory regions
+Critical data such as function return addresses or pointers may be overwritten
+Program execution flow can be altered
+How Buffer Overflows Occur
+
+Buffer overflows typically occur due to:
+
+Lack of input validation
+Use of unsafe functions (e.g., strcpy, gets)
+Improper handling of user input size
+Example Scenario:
+char buffer[10];
+strcpy(buffer, "This is a very long string");
+
+In this example:
+
+The buffer can hold only 10 bytes
+The input string exceeds that size
+Extra data overwrites adjacent memory
+
+This leads to memory corruption and potentially exploitable conditions.
+
+Simplified Exploitation Example
+
+An attacker may:
+
+Provide input larger than the buffer size
+Overwrite the return address of a function
+Redirect execution to malicious code (shellcode)
+
+For example:
+
+Inject payload into memory
+Overwrite return pointer
+Gain control of program execution
+
+This is commonly used to spawn a shell or execute unauthorized commands.
+
+Historical Significance
+
+Buffer overflow vulnerabilities have played a major role in cybersecurity history.
+
+Morris Worm (1988)
+One of the first internet worms
+Exploited buffer overflow vulnerabilities in UNIX systems
+Caused widespread disruption across early internet infrastructure
+Heartbleed Bug (2014)
+A critical vulnerability in OpenSSL
+Allowed attackers to read sensitive memory contents
+Exposed passwords, encryption keys, and private data
+
+These incidents highlight how dangerous memory vulnerabilities can be when exploited at scale.
+
+Mitigation Techniques
+
+Several techniques can be used to reduce buffer overflow risks:
+
+1. Bounds Checking
+Validate input size before storing data
+Prevent writing beyond allocated memory
+2. Safe Programming Practices
+Avoid unsafe functions like strcpy, gets
+Use safer alternatives such as strncpy
+3. Stack Canaries
+Special values placed on the stack
+Detect if buffer overflow occurs before function returns
+4. Address Space Layout Randomization (ASLR)
+Randomizes memory address locations
+Makes it harder for attackers to predict target addresses
+5. Non-Executable Memory (NX/DEP)
+Prevents execution of code in certain memory regions
+Blocks execution of injected shellcode
+6. Compiler Protections
+Modern compilers include built-in protections
+Example: stack protection flags
+Conclusion
+
+Buffer overflow vulnerabilities remain one of the most critical security issues in software development. They arise due to improper memory handling and can lead to severe consequences, including system crashes and unauthorized code execution. Understanding how buffer overflows occur and implementing proper mitigation techniques is essential for building secure applications.
+
+Developers must adopt secure coding practices, leverage modern compiler protections, and remain aware of memory safety principles to minimize the risk of exploitation.
