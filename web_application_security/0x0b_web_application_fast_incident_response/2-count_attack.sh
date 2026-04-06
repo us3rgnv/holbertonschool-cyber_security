@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ $# -ne 1 ]; then
-    echo "Usage: $0 <log_file>"
+    echo "Usage: $0 log.txt"
     exit 1
 fi
 
