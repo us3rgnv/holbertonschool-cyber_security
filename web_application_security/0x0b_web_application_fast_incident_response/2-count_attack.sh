@@ -1,12 +1,5 @@
 #!/bin/bash
 
-if [ $# -ne 1 ]; then
-    echo "Usage: $0 log.txt"
-    exit 1
-fi
+attacker=$(awk '{print $1}' logs.txt | sort | uniq -c | sort -nr | head -1 | awk '{print $2}')
 
-logfile=$1
-
-attacker=$(awk '{print $1}' "$logfile" | sort | uniq -c | sort -nr | head -1 | awk '{print $2}')
-
-awk -v ip="$attacker" '$1 == ip {count++} END {print count}' "$logfile"
+awk -v ip="$attacker" '$1 == ip {count++} END {print count}' logs.txt
